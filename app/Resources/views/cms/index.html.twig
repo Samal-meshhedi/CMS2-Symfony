@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h2 class="page-header">Page</h2>
+    <table class="table table-striped"> 
+    <thead> 
+        <tr> 
+            <th>#</th> 
+            <th>Todo</th> 
+            <th>Due Date</th> 
+            <th>Username</th> 
+            <th></th>
+        </tr> 
+    </thead> 
+    <tbody> 
+        {% for cms in cms2 %}
+        <tr> 
+            <th scope="row">{{cms.id}}</th> 
+            <td>{{cms.name}}</td> 
+            <td>{{cms.dueDate|date('F j, Y, g:i a')}}</td> 
+            <td>{{cms.username}}</td> 
+            <td><a href="/cms/details/{{cms.id}}" class="btn btn-success">view</a>
+            <a href="/cms/edit/{{cms.id}}" class="btn btn-default">Edit</a>
+            <a href="/cms/delete/{{cms.id}}" class="btn btn-danger">Delete</a></td>
+        </tr> 
+        {% endfor %}
+    </tbody> 
+    </table>
+{% endblock %}
