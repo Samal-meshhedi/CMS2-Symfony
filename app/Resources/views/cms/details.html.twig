@@ -3,6 +3,14 @@
 {% block body %} 
     <a class="btn btn-default" herf="" >back to cms2</a>
     <hr>
-    <h2 class="page-header"></h2>
-    
+    <h2 class="page-header">{{cms2.name}}</h2>
+    <ul class="list-group">
+        <li class="list-group-item">category:{{cms2.category}}</li>
+        <li class="list-group-item">priority:{{cms2.priority}}</li>
+        <li class="list-group-item">Doe: <strong>{{cms2.dueDate|date('F j, Y, g:i a')}}</strong></li>
+    </ul>
+    <p>
+        {{cms2.description}}
+    </p> 
+        
 {% endblock %}
