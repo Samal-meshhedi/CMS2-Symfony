@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/xampp/htdocs/cms2/app/Resources/views/cms/create.html.twig</file>
             <file>file:/C:/xampp/htdocs/cms2/app/Resources/views/base.html.twig</file>
-            <file>file:/C:/xampp/htdocs/cms2/src/AppBundle/AppBundle.php</file>
-            <file>file:/C:/xampp/htdocs/cms2/app/Resources/views/default/index.html.twig</file>
-            <file>file:/C:/xampp/htdocs/cms2/src/AppBundle/Controller/DefaultController.php</file>
+            <file>file:/C:/xampp/htdocs/cms2/app/Resources/views/cms/index.html.twig</file>
             <file>file:/C:/xampp/htdocs/cms2/app/config/parameters.yml</file>
         </group>
     </open-files>
