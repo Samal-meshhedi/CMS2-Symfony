@@ -86,7 +86,66 @@ class CmsController extends Controller
      * @Route("cms/edit/{id}", name="edit_list")
      */
     public function editAction($id, Request $request){
-        return $this->render('cms/edit.html.twig');   
+       $cms = $this->getDoctrine()
+                ->getRepository('AppBundle:Cms')
+                ->find($id);
+       
+              $now = new\DateTime('now');
+              
+              $cms->setName($cms->getName());
+              $cms->setCategory($cms->getCategory());
+              $cms->setDescription($cms->getDescription());
+              $cms->setPriority($cms->getPriority());
+              $cms->setDueDate($cms->getDuedate());
+              $cms->setCreateDate($now);
+         
+        $form = $this->createFormBuilder($cms)
+                ->add('name', TextType::class, array('attr' => array('class' => 'form-control','style' => 'margin-bottom:15px')))
+                ->add('category', TextType::class, array('attr' => array('class' => 'form-control','style' => 'margin-bottom:15px')))
+                ->add('description', TextareaType::class, array('attr' => array('class' => 'form-control','style' => 'margin-bottom:15px')))
+                ->add('priority', ChoiceType::class, array('choices' => array('Low' => 'low', 'Normal' => 'Normal', 'High' => 'High'), 'attr' => array('class' => 'form-control','style' => 'margin-bottom:15px')))
+                ->add('due_date', DateTimeType::class, array('attr' => array('class' => 'formcontrol','style' => 'margin-bottom:15px')))     
+                ->add('save', SubmitType::class, array('label' => 'Create Cms', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px')))
+                ->getForm();
+        
+        $form->handleRequest($request);
+        
+        if($form->isSubmitted() && $form->isValid()){
+              //Get Date
+              $name = $form['name']->getData();
+              $category = $form['category']->getData();
+              $description = $form['description']->getData();
+              $priority = $form['priority']->getData();
+              $due_date = $form['due_date']->getData();
+              
+              $now = new\DateTime('now');
+              
+              $em = $this->getDoctrine()->getManager();
+              $cms= $em->getRepository('AppBundle:cms')->find($id);
+              
+              $cms->setName($name);
+              $cms->setCategory($category);
+              $cms->setDescription($description);
+              $cms->setPriority($priority);
+              $cms->setDueDate($due_date);
+              $cms->setCreateDate($now);
+              
+              
+              $em->flush();
+              
+              $this->addFlash(
+                    'notice',
+                    'cms Updated'
+              );
+              
+              return $this->redirectToRoute('cms_list');
+              
+        }
+                
+        return $this->render('cms/edit.html.twig', array(
+            'cms' => $cms,
+             'form'=>$form->createView()   
+            ));   
     }
     
     /** 

@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %} 
-    Cms edit
+    <h2 class="page-header">edit cms</h2>
+    {{form_start(form)}}
+    {{form_widget(form)}}
+    {{form_end(form)}}
 {% endblock %}
