@@ -105,7 +105,7 @@ class CmsController extends Controller
                 ->add('description', TextareaType::class, array('attr' => array('class' => 'form-control','style' => 'margin-bottom:15px')))
                 ->add('priority', ChoiceType::class, array('choices' => array('Low' => 'low', 'Normal' => 'Normal', 'High' => 'High'), 'attr' => array('class' => 'form-control','style' => 'margin-bottom:15px')))
                 ->add('due_date', DateTimeType::class, array('attr' => array('class' => 'formcontrol','style' => 'margin-bottom:15px')))     
-                ->add('save', SubmitType::class, array('label' => 'Create Cms', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px')))
+                ->add('save', SubmitType::class, array('label' => 'Update Cms', 'attr' => array('class' => 'btn btn-primary', 'style' => 'margin-bottom:15px')))
                 ->getForm();
         
         $form->handleRequest($request);
@@ -129,7 +129,6 @@ class CmsController extends Controller
               $cms->setPriority($priority);
               $cms->setDueDate($due_date);
               $cms->setCreateDate($now);
-              
               
               $em->flush();
               
@@ -157,5 +156,23 @@ class CmsController extends Controller
                 ->find($id);
                 
         return $this->render('cms/details.html.twig', array('cms2' => $cms2));   
+    }
+    
+    /** 
+     * @Route("cms/delete/{id}", name="delete_list")
+     */
+    public function deleteAction($id){
+        $em = $this->getDoctrine()->getManager();
+        $cms= $em->getRepository('AppBundle:cms')->find($id);
+              
+        $em->remove($cms);
+        $em->flush();
+              
+        $this->addFlash(
+            'notice',
+            'cms Removed'
+            );
+              
+        return $this->redirectToRoute('cms_list');
     }
 }
