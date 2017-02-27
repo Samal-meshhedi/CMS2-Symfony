@@ -30,7 +30,7 @@ class CmsController extends Controller
     }
     
     /**
-     * @Route("cms/create", name="create_list")
+     * @Route("cms/create", name="cms_create")
      */
     public function createAction(Request $request){
         $cms = new Cms;
@@ -83,7 +83,7 @@ class CmsController extends Controller
     }
     
     /**
-     * @Route("cms/edit/{id}", name="edit_list")
+     * @Route("cms/edit/{id}", name="cms_edit")
      */
     public function editAction($id, Request $request){
        $cms = $this->getDoctrine()
@@ -159,7 +159,7 @@ class CmsController extends Controller
     }
     
     /** 
-     * @Route("cms/delete/{id}", name="delete_list")
+     * @Route("cms/delete/{id}", name="cms_delete")
      */
     public function deleteAction($id){
         $em = $this->getDoctrine()->getManager();
